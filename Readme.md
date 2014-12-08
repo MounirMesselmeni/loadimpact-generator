@@ -12,6 +12,9 @@
 #Install requirements
 `pip install -r requirements.txt`
 
+#Testing Parsers
+`python parsers/test.py`
+
 # Run generator
 `python generate_li_config.py`
 
