@@ -39,7 +39,6 @@ class LoadImpactGenerator(object):
         kwargs = {
             'tests': self.data['urls'],
             'num_threads': self.data['num_threads'],
-            'concurrent_pool': self.data['concurrent_pool'],
         }
         user_scenario = template.render(**kwargs)
         print("Scenario generated \n{0}".format(user_scenario))

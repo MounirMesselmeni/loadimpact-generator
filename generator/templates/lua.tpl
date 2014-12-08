@@ -1,4 +1,4 @@
-http.set_max_connections({{ num_threads }}, {{ concurrent_pool }})
+http.set_max_connections({{ num_threads }}, {{ num_threads }})
 
 http.request_batch({
 {% for test in tests %}
