@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import os
 from lxml import etree
 
 ARG_SELECTOR = str(".//elementProp[@name='HTTPsampler.Arguments']//"
@@ -9,11 +10,14 @@ ARG_SELECTOR = str(".//elementProp[@name='HTTPsampler.Arguments']//"
 class JMeterParser(object):
 
     """Apache JMeter jmx Parser"""
-    def __init__(self, file_path):
+    def __init__(self):
         super(JMeterParser, self).__init__()
-        self.file = open(file_path)
+        datafile = os.path.join(
+            os.path.abspath(os.path.dirname(__file__)), "test_plan.xml")
+        self.file = open(datafile)
 
     def initialize_etree(self):
+        """Using lxml to parse xml data"""
         self.etree = etree.fromstring(self.file.read())
         self.file.close()
 
@@ -66,6 +70,7 @@ class JMeterParser(object):
         return entries
 
     def parse_entry(self, entry):
+        """Parsing single url entry"""
         return dict(
             path=self.parse_entry_path(entry),
             method=self.parse_entry_method(entry),
@@ -136,7 +141,7 @@ class JMeterParser(object):
     def parse_entry_arguments(self, entry):
         arguments = entry.findall(ARG_SELECTOR)
         if not len(arguments):
-            return []
+            return {}
         arguments_dict = dict()
         for arg in arguments:
             name = arg.find(".//stringProp[@name='Argument.name']").text

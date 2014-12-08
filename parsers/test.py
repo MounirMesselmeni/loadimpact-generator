@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-import os
 import unittest
 
 from jmeter_parser import JMeterParser
@@ -11,9 +10,7 @@ class JMeterParserTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        datafile = os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), "test_plan.xml")
-        parser = JMeterParser(datafile)
+        parser = JMeterParser()
         cls.data = parser.get_data()
 
     def test_testname(self):
