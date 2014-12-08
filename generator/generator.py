@@ -80,7 +80,7 @@ class LoadImpactGenerator(object):
             'name': 'My {0} configuration {1}'.format(self.data['testname'], self.rand),
             'url': 'http://{0}'.format(self.data['domain']),
             'config': {
-                "load_schedule": [{"users": 10, "duration": 5}],
+                "load_schedule": [{"users": self.data['num_threads'], "duration": 5}],
                 "tracks": [{
                     "clips": [{
                         "user_scenario_id": self.scenario_id, "percent": 100
